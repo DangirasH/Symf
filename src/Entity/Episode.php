@@ -14,7 +14,7 @@ class Episode
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: Season::class, inversedBy: 'episodes')]
+    #[ORM\ManyToOne(targetEntity: Season::class, inversedBy: 'episodes', cascade: ['remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private $season;
 
