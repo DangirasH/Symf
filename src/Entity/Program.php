@@ -20,7 +20,12 @@ class Program
     #[Assert\NotBlank(message: 'Ne me laisse pas tout vide')]
     #[Assert\Length(
         max: 255,
-        maxMessage: 'La catégorie saisie {{ value }} est trop longue, elle ne devrait pas dépasser {{ limit }} caractères',
+        maxMessage: 'Le titre ne doit pas dépasser {{ limit }} caractères'
+    )]
+    #[Assert\Regex(
+        pattern: '/Plus belle la vie/',
+        match: false,
+        message: 'Le titre ne peut pas être {{ value }}',
     )]
     private $title;
 
