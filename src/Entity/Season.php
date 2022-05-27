@@ -28,7 +28,7 @@ class Season
     #[ORM\Column(type: 'text', nullable: true)]
     private $description;
 
-    #[ORM\OneToMany(mappedBy: 'season', targetEntity: Episode::class)]
+    #[ORM\OneToMany(mappedBy: 'season', targetEntity: Episode::class, cascade: ['persist', 'remove'])]
     private $episodes;
 
     public function __construct()
