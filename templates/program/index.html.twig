@@ -6,6 +6,7 @@
 {% block body %}
 	<h1>Toutes les series:
 	</h1>
+	<a href="{{ path('program_new') }}">Ajouter une série</a>
 	{% for program in programs %}
 		<div>
 			<h2>{{ loop.index }}

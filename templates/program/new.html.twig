@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<main>
+		<h1>Nouvelle série</h1>
+		
+			{{ form_start(formProgram) }}
+			{{ form_row(formProgram.title, {'attr': {'label': 'Titre', 'placeholder': 'Titre de la nouvelle série'}}) }}
+			{{ form_row(formProgram.synopsis, {'attr': {'placeholder': 'Synopsis de la nouvelle série'}}) }}
+			{{ form_row(formProgram.poster, {'attr': {'placeholder': 'Affiche de la nouvelle série'}}) }}
+			{{ form_row(formProgram.category) }}
+			<button class="btn btn-primary text-white px-3" type="submit">Ajouter</button>
+			{{ form_end(formProgram) }}
+		
+	</main>
+{% endblock %}
