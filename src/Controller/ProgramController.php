@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ProgramType;
 use App\Entity\Program;
+use App\Service\Slugify;
 use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,14 +25,16 @@ class ProgramController extends AbstractController
         );
     }
 
-    #[Route('/new', name: 'new')]
-    public function new(Request $request, ProgramRepository $programRepository): Response
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+    public function new(Request $request, ProgramRepository $programRepository, Slugify $slugify): Response
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
             $programRepository->add($program, true);
 
             return $this->redirectToRoute('program_index');
@@ -42,10 +45,10 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/', methods: ['GET'], requirements: ['id'=>'\d+'], name: 'show')]
-    public function show(int $id, ProgramRepository $programRepository)
+    #[Route('/{slug}/', methods: ['GET'], name: 'show')]
+    public function show($slug, ProgramRepository $programRepository)
     {
-        $program = $programRepository->findOneBy(['id' => $id]);
+        $program = $programRepository->findOneBy(['slug' => $slug]);
         $seasons = $program->getSeasons();
 
         return $this->render('program/show.html.twig', [
