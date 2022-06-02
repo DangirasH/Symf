@@ -13,7 +13,7 @@
                     /
                     {{ program.title }}</h2>
                 <p>{{ program.synopsis }}</p>
-                <a href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
+                <a href="{{ path("program_show", { slug: program.slug }) }}">Voir la fiche</a>
             </div>
         {% else %}
             Aucune série trouvée.
