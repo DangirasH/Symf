@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Program;
+
 use App\Entity\Season;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
